@@ -1251,9 +1251,10 @@ select:focus {
 /* Workspace specific styling */
 .workspace-actions {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin: 2.5rem 0 3.5rem 0;
+    width: 100%;
 }
 
 .button.primary-action,
@@ -1263,7 +1264,7 @@ select:focus {
     gap: 1.5rem;
     padding: 1.8rem;
     border-radius: 16px;
-    justify-content: flex-start;
+    justify-content: center;
     height: auto;
     max-width: 100%;
     min-height: 120px;
@@ -1312,7 +1313,7 @@ select:focus {
     flex-direction: column;
     gap: 0.5rem;
     text-align: left;
-    flex: 1;
+    flex: 0 1 auto;
 }
 
 .action-title {
@@ -1355,8 +1356,9 @@ select:focus {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .workspace-actions {
+        grid-template-columns: 1fr;
         gap: 1.2rem;
     }
     
