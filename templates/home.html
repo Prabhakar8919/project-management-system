@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Home | Project Management Studio{% endblock %}
+{% block content %}
+<section class="hero-section">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <p class="eyebrow">Modern project management</p>
+            <h1>Design. Track. Approve. Deliver.</h1>
+            <p class="hero-text">A sleek workspace for creators, managers and teams to build meaningful projects with powerful approval workflows and a polished interface.</p>
+            <div class="hero-ctas">
+                <a class="button" href="/signup/">Get Started</a>
+                <a class="button button-alt" href="/projects/">Explore Projects</a>
+            </div>
+        </div>
+        <div class="hero-panel glass-card">
+            <div class="hero-panel-inner">
+                <p class="status-tag">Live collaboration</p>
+                <h2>Manage priorities with clarity</h2>
+                <p>Track your ideas, publish projects, and get admin approval in one polished dashboard.</p>
+                <div class="feature-list">
+                    <span>Fast project creation</span>
+                    <span>Approval workflows</span>
+                    <span>Smart stats</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="container section-heading">
+        <span class="eyebrow">Features</span>
+        <h2>Everything your team needs to stay productive</h2>
+    </div>
+    <div class="container cards-grid">
+        <article class="feature-card fade-up">
+            <h3>Project Explorer</h3>
+            <p>Search, filter, sort and inspect project cards with responsive, modern UI.</p>
+        </article>
+        <article class="feature-card fade-up delay-1">
+            <h3>Project Workplace</h3>
+            <p>Create, edit and manage your own projects while keeping approvals transparent.</p>
+        </article>
+        <article class="feature-card fade-up delay-2">
+            <h3>Admin Approval</h3>
+            <p>Admins can approve or reject submissions and keep workflows aligned.</p>
+        </article>
+    </div>
+</section>
+
+<section class="info-section">
+    <div class="container info-grid">
+        <div>
+            <h2>Built for practical project workflows</h2>
+            <p>Project Management Studio is designed for teams that want a lightweight yet powerful system with strong data controls, intuitive cards, and a clean approval dashboard.</p>
+        </div>
+        <div class="info-card glass-card">
+            <h3>Why choose Project Management?</h3>
+            <ul>
+                <li>Fast onboarding with email signup</li>
+                <li>Dashboard metrics for every user</li>
+                <li>Responsive layouts built with CSS grid</li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

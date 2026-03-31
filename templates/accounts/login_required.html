@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Login Required | Project Management{% endblock %}
+{% block content %}
+<section class="page-section">
+    <div class="container auth-panel glass-card">
+        <h2>Login Required</h2>
+        <p>You must be logged in to view this page.</p>
+        <div class="button-group">
+            <a class="button" href="/login/?next={{ next_url }}">Login</a>
+            <a class="button button-alt" href="/signup/">Create Account</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

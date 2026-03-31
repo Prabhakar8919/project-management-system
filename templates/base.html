@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Project Management{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=2">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header sticky-nav">
+            <div class="container header-inner">
+                <a href="/" class="brand-logo">Project Management</a>
+                <nav class="main-nav">
+                    <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+                    <a href="/projects/" class="{% if request.path|slice:"0:10" == '/projects/' and request.path|slice:"0:16" != '/projects/studio' and request.path|slice:"0:15" != '/projects/create' and request.path|slice:"0:14" != '/projects/edit' and request.path|slice:"0:16" != '/projects/delete' %}active{% endif %}">Project Explorer</a>
+                    <a href="/projects/studio/" class="{% if request.path|slice:"0:16" == '/projects/studio' or request.path|slice:"0:15" == '/projects/create' or request.path|slice:"0:14" == '/projects/edit' or request.path|slice:"0:16" == '/projects/delete' %}active{% endif %}">Project Workplace</a>
+                    <a href="/dashboard/" class="{% if request.path|slice:"0:10" == '/dashboard' %}active{% endif %}">Dashboard</a>
+                </nav>
+                <div class="nav-actions">
+                    {% if request.user.is_authenticated %}
+                        <span class="user-chip">Hello, {{ request.user.username }}</span>
+                        <a class="button button-alt" href="/logout/">Logout</a>
+                    {% else %}
+                        <a class="button" href="/login/">Login</a>
+                        <a class="button button-alt" href="/signup/">Signup</a>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+
+        <main class="page-content">
+            {% if messages %}
+                <div class="toast-container">
+                    {% for message in messages %}
+                        <div class="toast toast-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <p>© 2026 Project Management • Built with Django &amp; custom CSS</p>
+                <p>Contact: hello@projectmanagement.example</p>
+            </div>
+        </footer>
+    </div>
+    <script src="{% static 'js/auth.js' %}"></script>
+    <script src="{% static 'js/navigation.js' %}"></script>
+</body>
+</html>

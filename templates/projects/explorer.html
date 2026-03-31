@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}Project Explorer | Project Management{% endblock %}
+{% block content %}
+<section class="page-section">
+    <div class="container section-heading">
+        <span class="eyebrow">Project Explorer</span>
+        <h2>Discover & Explore Amazing Projects</h2>
+    </div>
+    <div class="container filter-bar glass-card">
+        <form class="filter-form" method="get">
+            <input type="search" name="search" placeholder="🔍 Search by title" value="{{ search }}">
+            <select name="category">
+                <option value="">📁 All categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.name }}" {% if category.name == request.GET.category %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <select name="status">
+                <option value="">📊 All statuses</option>
+                <option value="pending" {% if status_filter == 'pending' %}selected{% endif %}>⏳ Pending</option>
+                <option value="approved" {% if status_filter == 'approved' %}selected{% endif %}>✅ Approved</option>
+                <option value="rejected" {% if status_filter == 'rejected' %}selected{% endif %}>❌ Rejected</option>
+            </select>
+            <select name="sort">
+                <option value="latest" {% if sort == 'latest' %}selected{% endif %}>⏱️ Latest</option>
+                <option value="oldest" {% if sort == 'oldest' %}selected{% endif %}>🏛️ Oldest</option>
+                <option value="alpha" {% if sort == 'alpha' %}selected{% endif %}>🔤 Alphabetical</option>
+            </select>
+            <button type="submit" class="button">Apply Filter</button>
+        </form>
+    </div>
+
+    {% if db_error %}
+        <div class="container alert-card">
+            <p>{{ db_error }}</p>
+            <a class="button" href="/projects/studio/">Create Project</a>
+        </div>
+    {% endif %}
+
+    {% if projects %}
+    <div class="container cards-grid">
+        {% for project in projects %}
+            <article class="project-card hover-card">
+                <div class="card-head">
+                    <span class="badge">📁 {{ project.category.name }}</span>
+                    <span class="badge status {{ project.status }}">
+                        {% if project.status == 'approved' %}✅{% elif project.status == 'pending' %}⏳{% else %}❌{% endif %}
+                        {{ project.get_status_display }}
+                    </span>
+                </div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description|truncatechars:120 }}</p>
+                <div class="card-meta">
+                    <span>👤 {{ project.created_by.username }}</span>
+                    <span>📅 {{ project.created_at|date:'M d, Y' }}</span>
+                </div>
+                <a class="button button-small" href="/projects/detail/{{ project.pk }}/">View Details →</a>
+            </article>
+        {% endfor %}
+    </div>
+    <div class="container pagination-bar">
+        {% if page_obj.has_previous %}
+            <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}{% if request.GET.status %}status={{ request.GET.status }}&{% endif %}{% if request.GET.sort %}sort={{ request.GET.sort }}&{% endif %}page={{ page_obj.previous_page_number }}" class="button button-alt">← Previous</a>
+        {% endif %}
+        <span class="pagination-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}{% if request.GET.status %}status={{ request.GET.status }}&{% endif %}{% if request.GET.sort %}sort={{ request.GET.sort }}&{% endif %}page={{ page_obj.next_page_number }}" class="button button-alt">Next →</a>
+        {% endif %}
+    </div>
+    {% else %}
+        <div class="container empty-state">
+            <h3>🎯 No projects available</h3>
+            <p>There are no active projects at the moment. Start your first project in the Project Workplace.</p>
+            <a class="button" href="/projects/studio/">✨ Create Project</a>
+        </div>
+    {% endif %}
+
+    <div class="container section-heading">
+        <span class="eyebrow">Trending</span>
+        <h2>🏆 Recently Approved Projects</h2>
+    </div>
+    <div class="container cards-grid">
+        {% for project in trending %}
+            <article class="project-card">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description|truncatechars:90 }}</p>
+                <div class="card-meta">
+                    <span>📁 {{ project.category.name }}</span>
+                    <span>📅 {{ project.created_at|date:'M d' }}</span>
+                </div>
+            </article>
+        {% empty %}
+            <article class="project-card">
+                <h3>No trending projects yet</h3>
+                <p>Approved projects will show here once they are published.</p>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

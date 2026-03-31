@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ project.title }} | Project Management{% endblock %}
+{% block content %}
+<section class="page-section">
+    <div class="container detail-panel glass-card">
+        <div class="detail-badge-row">
+            <span class="badge">{{ project.category.name }}</span>
+            <span class="badge status {{ project.status }}">{{ project.get_status_display }}</span>
+        </div>
+        <h1>{{ project.title }}</h1>
+        <p class="detail-meta">Created by {{ project.created_by.username }} • {{ project.created_at|date:'F j, Y' }}</p>
+        <p class="detail-meta">Student: {{ project.student_name }} • Roll No: {{ project.roll_number }}</p>
+        {% if project.project_link %}
+            <p class="detail-meta"><a class="link-button" href="{{ project.project_link }}" target="_blank" rel="noopener">Live Deployment</a></p>
+        {% endif %}
+        <p class="detail-description">{{ project.description }}</p>
+        <div class="detail-actions">
+            <a class="button" href="/projects/">Back to Explorer</a>
+            {% if request.user == project.created_by and project.status != 'approved' %}
+                <a class="button button-alt" href="/projects/edit/{{ project.pk }}/">Edit</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

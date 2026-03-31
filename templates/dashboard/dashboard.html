@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | Project Management{% endblock %}
+{% block content %}
+<section class="page-section">
+    <div class="container section-heading">
+        <span class="eyebrow">Analytics Dashboard</span>
+        <h2>📊 Your Performance Overview</h2>
+    </div>
+
+    <!-- Key metrics row -->
+    <div class="container stats-grid">
+        <div class="stat-card glass-card">
+            <h3>📈 Total Projects</h3>
+            <p>{{ stats.total }}</p>
+        </div>
+        <div class="stat-card glass-card">
+            <h3>✅ Approved</h3>
+            <p>{{ stats.approved }}</p>
+        </div>
+        <div class="stat-card glass-card">
+            <h3>⏳ Pending</h3>
+            <p>{{ stats.pending }}</p>
+        </div>
+        <div class="stat-card glass-card">
+            <h3>❌ Rejected</h3>
+            <p>{{ stats.rejected }}</p>
+        </div>
+    </div>
+
+    <!-- Approval rate and insights -->
+    <div class="container">
+        <div class="insights-grid">
+            <!-- Approval rate card -->
+            <div class="insight-card glass-card">
+                <div class="insight-header">
+                    <h3>📊 Approval Rate</h3>
+                    <span class="approval-percentage">{{ approval_rate }}%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ approval_rate }}%"></div>
+                </div>
+                <p class="insight-text">
+                    {% if approval_rate >= 80 %}
+                    🌟 Excellent! Keep up the great work!
+                    {% elif approval_rate >= 60 %}
+                    👍 Good progress! You're on the right track.
+                    {% elif approval_rate >= 40 %}
+                    🎯 Keep improving your project quality.
+                    {% else %}
+                    💡 Focus on the feedback and improve your submissions.
+                    {% endif %}
+                </p>
+            </div>
+
+            <!-- Status distribution -->
+            <div class="insight-card glass-card">
+                <h3>📈 Status Distribution</h3>
+                <div class="status-breakdown">
+                    <div class="status-item">
+                        <div class="status-label">
+                            <span class="status-dot approved"></span>
+                            <span>Approved</span>
+                        </div>
+                        <div class="status-bar">
+                            <div class="status-fill approved" style="width: {{ status_dist.approved_pct }}%"></div>
+                        </div>
+                        <span class="status-count">{{ status_dist.approved_pct }}%</span>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">
+                            <span class="status-dot pending"></span>
+                            <span>Pending</span>
+                        </div>
+                        <div class="status-bar">
+                            <div class="status-fill pending" style="width: {{ status_dist.pending_pct }}%"></div>
+                        </div>
+                        <span class="status-count">{{ status_dist.pending_pct }}%</span>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">
+                            <span class="status-dot rejected"></span>
+                            <span>Rejected</span>
+                        </div>
+                        <div class="status-bar">
+                            <div class="status-fill rejected" style="width: {{ status_dist.rejected_pct }}%"></div>
+                        </div>
+                        <span class="status-count">{{ status_dist.rejected_pct }}%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top approved projects -->
+    {% if top_projects %}
+    <div class="container section-heading">
+        <h3>🏆 Your Best Projects (Approved)</h3>
+    </div>
+    <div class="container cards-grid">
+        {% for project in top_projects %}
+            <article class="project-card hover-card">
+                <div class="card-head">
+                    <span class="badge">📁 {{ project.category.name }}</span>
+                    <span class="badge status approved">✅ {{ project.get_status_display }}</span>
+                </div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description|truncatechars:100 }}</p>
+                <div class="card-meta">
+                    <span>👤 {{ project.student_name }} • 🎓 {{ project.roll_number }}</span>
+                    <span>📅 {{ project.created_at|date:'M d, Y' }}</span>
+                </div>
+                {% if project.project_link %}
+                    <a href="{{ project.project_link }}" target="_blank" rel="noopener" class="button button-small">🌐 View Live →</a>
+                {% endif %}
+            </article>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Category breakdown -->
+    {% if category_breakdown %}
+    <div class="container section-heading">
+        <h3>📂 Projects by Category</h3>
+    </div>
+    <div class="container">
+        <div class="category-breakdown glass-card">
+            {% for item in category_breakdown %}
+                <div class="category-item">
+                    <div class="category-info">
+                        <span class="category-name">{{ item.category__name }}</span>
+                        <span class="category-count">{{ item.count }} project{{ item.count|pluralize }}</span>
+                    </div>
+                    <div class="category-bar">
+                        <div class="category-fill" style="width: {{ item.percentage }}%; background: hsl({{ item.hue }}, 70%, 60%);"></div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Recent activity -->
+    <div class="container section-heading">
+        <h3>🔥 Recent Activity</h3>
+    </div>
+    <div class="container cards-grid">
+        {% for project in recent %}
+            <article class="project-card hover-card">
+                <div class="card-head">
+                    <span class="badge">📁 {{ project.category.name }}</span>
+                    <span class="badge status {{ project.status }}">
+                        {% if project.status == 'approved' %}✅{% elif project.status == 'pending' %}⏳{% else %}❌{% endif %}
+                        {{ project.get_status_display }}
+                    </span>
+                </div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description|truncatechars:100 }}</p>
+                <div class="card-meta">
+                    <span>📅 {{ project.created_at|date:'M d, Y \a\t H:i' }}</span>
+                </div>
+            </article>
+        {% empty %}
+            <div class="empty-state">
+                <h3>🎯 No recent projects yet</h3>
+                <p>Start creating projects to see them here!</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Admin Panel | Project Management{% endblock %}
+{% block content %}
+<section class="page-section">
+    <div class="container section-heading">
+        <span class="eyebrow">Admin Dashboard</span>
+        <h2>Approval panel & system overview</h2>
+    </div>
+    <div class="container stats-grid">
+        <div class="stat-card glass-card">
+            <h3>Users</h3>
+            <p>{{ counts.total_users }}</p>
+        </div>
+        <div class="stat-card glass-card">
+            <h3>Projects</h3>
+            <p>{{ counts.total_projects }}</p>
+        </div>
+        <div class="stat-card glass-card">
+            <h3>Approved</h3>
+            <p>{{ counts.approved }}</p>
+        </div>
+        <div class="stat-card glass-card">
+            <h3>Pending</h3>
+            <p>{{ counts.pending }}</p>
+        </div>
+    </div>
+    <div class="container table-panel glass-card">
+        <h3>Project Approval Queue</h3>
+        <div class="table-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Owner</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for project in projects %}
+                        <tr>
+                            <td>{{ project.title }}</td>
+                            <td>{{ project.created_by.username }}</td>
+                            <td>{{ project.category.name }}</td>
+                            <td><span class="badge status {{ project.status }}">{{ project.get_status_display }}</span></td>
+                            <td>
+                                <form method="post" class="admin-action-form">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="project_id" value="{{ project.pk }}">
+                                    <button name="action" value="approved" class="button button-small">Approve</button>
+                                    <button name="action" value="rejected" class="button button-small button-alt">Reject</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="5">No projects available.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

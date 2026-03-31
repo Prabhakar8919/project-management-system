@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Delete Project | Project Management{% endblock %}
+{% block content %}
+<section class="page-section">
+    <div class="container confirm-panel glass-card">
+        <h2>Delete Project</h2>
+        <p>Are you sure you want to delete <strong>{{ project.title }}</strong>? This action cannot be undone.</p>
+        <form method="post">
+            {% csrf_token %}
+            <button class="button button-danger" type="submit">Confirm Delete</button>
+            <a class="button button-alt" href="/projects/studio/">Cancel</a>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}Project Workplace | Project Management{% endblock %}
+{% block content %}
+<section class="page-section">
+    <div class="container section-heading">
+        <span class="eyebrow">Project Workplace</span>
+        <h2>🔧 Your Creative Studio</h2>
+    </div>
+
+    <!-- Quick stats for workspace context -->
+    <div class="container stats-grid">
+        <div class="stat-card glass-card">
+            <h3>📋 My Projects</h3>
+            <p>{{ stats.total }}</p>
+        </div>
+        <div class="stat-card glass-card">
+            <h3>✅ Approved</h3>
+            <p>{{ stats.approved }}</p>
+        </div>
+        <div class="stat-card glass-card">
+            <h3>⏳ Under Review</h3>
+            <p>{{ stats.pending }}</p>
+        </div>
+        <div class="stat-card glass-card">
+            <h3>⚡ Quick Actions</h3>
+            <p>2</p>
+        </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="container workspace-actions">
+        <a class="button primary-action" href="/projects/create/">
+            <span class="action-icon">✨</span>
+            <div class="action-text">
+                <div class="action-title">Create New Project</div>
+                <div class="action-desc">Start a new project from scratch</div>
+            </div>
+        </a>
+        <a class="button secondary-action" href="/projects/">
+            <span class="action-icon">🔍</span>
+            <div class="action-text">
+                <div class="action-title">Browse All Projects</div>
+                <div class="action-desc">Explore what others are building</div>
+            </div>
+        </a>
+        <a class="button secondary-action" href="/dashboard/">
+            <span class="action-icon">📊</span>
+            <div class="action-text">
+                <div class="action-title">View Analytics</div>
+                <div class="action-desc">Check your performance metrics</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Projects section -->
+    <div class="container">
+        <div class="section-header-with-filter">
+            <div class="section-heading">
+                <h3>📋 My Projects</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="container cards-grid">
+        {% for project in my_projects %}
+            <article class="project-card hover-card workspace-card">
+                <div class="card-head">
+                    <span class="badge">📁 {{ project.category.name }}</span>
+                    <span class="badge status {{ project.status }}">
+                        {% if project.status == 'approved' %}✅{% elif project.status == 'pending' %}⏳{% else %}❌{% endif %}
+                        {{ project.get_status_display }}
+                    </span>
+                </div>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description|truncatechars:100 }}</p>
+                <div class="card-meta">
+                    <span>👤 {{ project.student_name }} • 🎓 {{ project.roll_number }}</span>
+                    <span>📅 {{ project.created_at|date:'M d, Y' }}</span>
+                </div>
+                {% if project.project_link %}
+                    <div class="card-link">
+                        <a href="{{ project.project_link }}" target="_blank" rel="noopener" class="button button-small">🌐 View Deployment →</a>
+                    </div>
+                {% endif %}
+                <div class="card-actions">
+                    <a class="button button-small" href="/projects/detail/{{ project.pk }}/">📖 Details</a>
+                    {% if project.status != 'approved' %}
+                        <a class="button button-small button-alt" href="/projects/edit/{{ project.pk }}/">✏️ Edit</a>
+                        <a class="button button-small button-danger delete-link" href="/projects/delete/{{ project.pk }}/">🗑️ Delete</a>
+                    {% else %}
+                        <span class="notice">🔒 Approved - Read Only</span>
+                    {% endif %}
+                </div>
+            </article>
+        {% empty %}
+            <div class="empty-state">
+                <h3>🎯 Welcome to Your Workspace!</h3>
+                <p>You haven't created any projects yet. Click the "Create New Project" button above to get started.</p>
+                <a class="button" href="/projects/create/">Start Creating →</a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

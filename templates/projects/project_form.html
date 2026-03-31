@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}{{ action }} Project | Project Management{% endblock %}
+{% block content %}
+<section class="page-section">
+    <div class="container section-heading">
+        <span class="eyebrow">Project Studio</span>
+        <h2>{{ action }} Project</h2>
+    </div>
+    <div class="container form-panel glass-card">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-grid">
+                <label for="{{ form.title.id_for_label }}">📌 Project Title</label>
+                {{ form.title }}
+                {% if form.title.errors %}
+                    <span class="form-error">{{ form.title.errors.0 }}</span>
+                {% endif %}
+            </div>
+            <div class="form-grid">
+                <label for="{{ form.student_name.id_for_label }}">👤 Student Name</label>
+                {{ form.student_name }}
+                {% if form.student_name.errors %}
+                    <span class="form-error">{{ form.student_name.errors.0 }}</span>
+                {% endif %}
+            </div>
+            <div class="form-grid">
+                <label for="{{ form.roll_number.id_for_label }}">🎓 Roll Number</label>
+                {{ form.roll_number }}
+                {% if form.roll_number.errors %}
+                    <span class="form-error">{{ form.roll_number.errors.0 }}</span>
+                {% endif %}
+            </div>
+            <div class="form-grid">
+                <label for="{{ form.category.id_for_label }}">📁 Category</label>
+                {{ form.category }}
+                {% if form.category.errors %}
+                    <span class="form-error">{{ form.category.errors.0 }}</span>
+                {% endif %}
+            </div>
+            <div class="form-grid">
+                <label for="{{ form.description.id_for_label }}">📝 Project Description</label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <span class="form-error">{{ form.description.errors.0 }}</span>
+                {% endif %}
+            </div>
+            <div class="form-grid">
+                <label for="{{ form.project_link.id_for_label }}">🔗 Project Link (Optional)</label>
+                {{ form.project_link }}
+                {% if form.project_link.errors %}
+                    <span class="form-error">{{ form.project_link.errors.0 }}</span>
+                {% endif %}
+            </div>
+            {% if category_form %}
+                <div class="form-grid split-fields">
+                    <div>
+                        <label for="{{ category_form.name.id_for_label }}">➕ New Category</label>
+                        {{ category_form.name }}
+                    </div>
+                    <button class="button button-alt" name="new_category" value="1" type="submit">Add Category</button>
+                </div>
+            {% endif %}
+            <div class="form-actions">
+                <button class="button" type="submit">{{ action }}</button>
+                <a class="button button-alt" href="/projects/studio/">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

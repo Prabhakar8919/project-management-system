@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Signup | Project Management{% endblock %}
+{% block content %}
+<section class="auth-section">
+    <div class="container auth-panel glass-card">
+        <h2>Create Your Account</h2>
+        <p>Already have an account? <a href="/login/">Sign in</a></p>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-grid">
+                <label>Username</label>
+                {{ form.username }}
+            </div>
+            <div class="form-grid">
+                <label>Email</label>
+                {{ form.email }}
+            </div>
+            <div class="form-grid password-field">
+                <label>Password</label>
+                <div class="input-with-icon">
+                    {{ form.password }}
+                    <button type="button" class="eye-toggle" aria-label="Toggle password visibility">👁</button>
+                </div>
+                <div id="password-strength" class="validation-message"></div>
+                <div class="password-help-box">
+                    <p>Password must contain:</p>
+                    <ul class="password-requirements">
+                        <li data-rule="lowercase">Lowercase letter</li>
+                        <li data-rule="uppercase">Uppercase letter</li>
+                        <li data-rule="number">Number</li>
+                        <li data-rule="special">Special character</li>
+                        <li data-rule="length">At least 8 characters</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-grid confirm-field">
+                <label>Confirm Password</label>
+                {{ form.confirm_password }}
+                <div id="password-match" class="validation-message"></div>
+            </div>
+            <button class="button" type="submit">Sign Up</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
