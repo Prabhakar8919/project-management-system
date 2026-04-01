@@ -2,7 +2,26 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.http import HttpResponse
 from .forms import SignUpForm, LoginForm
+
+TRANSPARENT_1X1_PNG = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x06\x00\x00\x00\x1f\x15\xc4\x89\x00\x00\x00\nIDATx\x9cc\x00\x01\x00\x00\x05\x00\x01\r\n-\xb4\x00\x00\x00\x00IEND\xaeB`\x82'
+
+def set_theme_light(request):
+    request.session['theme'] = 'light'
+    request.session.modified = True
+    response = HttpResponse(TRANSPARENT_1X1_PNG, content_type="image/png")
+    response['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    response['Pragma'] = 'no-cache'
+    return response
+
+def set_theme_dark(request):
+    request.session['theme'] = 'dark'
+    request.session.modified = True
+    response = HttpResponse(TRANSPARENT_1X1_PNG, content_type="image/png")
+    response['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    response['Pragma'] = 'no-cache'
+    return response
 
 
 def landing_page(request):

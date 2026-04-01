@@ -5,21 +5,23 @@ from django.contrib.auth.models import User
 
 class SignUpForm(forms.ModelForm):
     password = forms.CharField(
-        widget=forms.PasswordInput(
+        widget=forms.TextInput(
             attrs={
                 'placeholder': 'Enter password',
                 'pattern': '(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{8,}',
                 'title': 'Password must contain lowercase, uppercase, number, special character and be at least 8 characters',
                 'required': 'required',
+                'class': 'css-password-field',
             }
         ),
         label='Password',
     )
     confirm_password = forms.CharField(
-        widget=forms.PasswordInput(
+        widget=forms.TextInput(
             attrs={
                 'placeholder': 'Confirm password',
                 'required': 'required',
+                'class': 'css-password-field',
             }
         ),
         label='Confirm Password',
@@ -44,4 +46,4 @@ class SignUpForm(forms.ModelForm):
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username', 'autocomplete': 'off'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'autocomplete': 'new-password'}))
+    password = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Password', 'autocomplete': 'new-password', 'class': 'css-password-field'}))

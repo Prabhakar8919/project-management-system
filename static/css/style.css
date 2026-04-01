@@ -16,8 +16,79 @@
     --color-pink: #f472b6;
     --color-orange: #fb923c;
     --color-cyan: #22d3ee;
+    
+    /* Card overrides for better visibility in dark mode */
+    --card-bg: #1a1a1a;
+    --card-border: #2a2a2a;
+    --card-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    
+    /* Hardcoded panel variables */
+    --header-bg: linear-gradient(180deg, rgba(3, 10, 23, 0.96), rgba(7, 14, 34, 0.88));
+    --header-border: rgba(255,255,255,0.12);
+    --glass-bg: linear-gradient(135deg, rgba(8, 18, 31, 0.4), rgba(20, 35, 60, 0.3));
+    --glass-border: rgba(110, 231, 183, 0.15);
+    --form-bg: linear-gradient(135deg, rgba(8, 18, 31, 0.5), rgba(20, 35, 60, 0.3));
+    
+    /* Inputs */
+    --input-bg: linear-gradient(135deg, rgba(8, 18, 31, 0.8), rgba(20, 35, 60, 0.4));
+    --input-border: rgba(110, 231, 183, 0.25);
+    --input-focus-bg: linear-gradient(135deg, rgba(8, 18, 31, 0.95), rgba(20, 35, 60, 0.6));
+    
+    /* Nav */
+    --nav-hover: #ffffff;
+    
+    /* Buttons */
+    --btn-primary-bg: linear-gradient(135deg, #6ee7b7 0%, #22c55e 100%);
+    --btn-primary-text: #08121f;
+    --btn-primary-shadow: 0 8px 24px rgba(110, 231, 183, 0.3);
+    
+    --btn-alt-bg: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(168, 85, 247, 0.15));
+    --btn-alt-border: rgba(110, 231, 183, 0.4);
+    --btn-alt-shadow: 0 8px 24px rgba(110, 231, 183, 0.15);
+    
     font-family: Inter, system-ui, sans-serif;
 }
+
+html:has(#theme-toggle:checked) {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-strong: #f1f5f9;
+    --border: #e2e8f0;
+    --text: #0f172a;
+    --muted: #475569;
+    --accent: #059669;
+    --accent-dark: #047857;
+    
+    /* Light theme cards */
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    
+    /* Hardcoded panel variables in light */
+    --header-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.88));
+    --header-border: rgba(0,0,0,0.08);
+    --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(241, 245, 249, 0.5));
+    --glass-border: rgba(16, 185, 129, 0.2);
+    --form-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(241, 245, 249, 0.7));
+    
+    /* Inputs */
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --input-border: rgba(16, 185, 129, 0.3);
+    --input-focus-bg: #ffffff;
+    
+    /* Nav */
+    --nav-hover: #059669;
+    
+    /* Buttons */
+    --btn-primary-bg: linear-gradient(135deg, #059669 0%, #047857 100%);
+    --btn-primary-text: #ffffff;
+    --btn-primary-shadow: 0 8px 24px rgba(5, 150, 105, 0.2);
+    
+    --btn-alt-bg: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(168, 85, 247, 0.1));
+    --btn-alt-border: rgba(5, 150, 105, 0.3);
+    --btn-alt-shadow: 0 8px 24px rgba(5, 150, 105, 0.1);
+}
+
 
 * {
     box-sizing: border-box;
@@ -30,10 +101,11 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
-    background: radial-gradient(circle at top, rgba(110, 231, 183, 0.18), transparent 28%),
-                radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.16), transparent 28%),
-                var(--bg);
+    background-color: var(--bg);
+    background-image: radial-gradient(circle at top, rgba(110, 231, 183, 0.18), transparent 28%),
+                radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.16), transparent 28%);
     color: var(--text);
+    transition: background-color var(--transition), color var(--transition);
 }
 
 img {
@@ -63,8 +135,8 @@ textarea {
     top: 0;
     z-index: 20;
     backdrop-filter: blur(22px);
-    background: linear-gradient(180deg, rgba(3, 10, 23, 0.96), rgba(7, 14, 34, 0.88));
-    border-bottom: 1px solid rgba(255,255,255,0.12);
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--header-border);
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
 }
 .header-inner {
@@ -102,7 +174,7 @@ textarea {
 
 .main-nav a:hover,
 .main-nav a.active {
-    color: #ffffff;
+    color: var(--nav-hover);
     transform: translateY(-1px);
 }
 
@@ -166,14 +238,14 @@ textarea {
     padding: 1rem 1.8rem;
     border-radius: 12px;
     border: 2px solid transparent;
-    background: linear-gradient(135deg, #6ee7b7 0%, #22c55e 100%);
-    color: #08121f;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
     font-weight: 700;
     letter-spacing: 0.02em;
     transition: all var(--transition);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(110, 231, 183, 0.3);
+    box-shadow: var(--btn-primary-shadow);
     cursor: pointer;
     text-transform: uppercase;
     font-size: 0.9rem;
@@ -204,10 +276,10 @@ textarea {
 }
 
 .button-alt {
-    background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(168, 85, 247, 0.15));
-    border-color: rgba(110, 231, 183, 0.4);
+    background: var(--btn-alt-bg);
+    border-color: var(--btn-alt-border);
     color: var(--text);
-    box-shadow: 0 8px 24px rgba(110, 231, 183, 0.15);
+    box-shadow: var(--btn-alt-shadow);
 }
 
 .button-alt:hover {
@@ -344,29 +416,31 @@ h1 {
 .confirm-panel,
 .table-panel,
 .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--card-bg, var(--surface));
+    border: 1px solid var(--card-border, var(--border));
     border-radius: 28px;
     padding: 1.7rem;
-    box-shadow: 0 30px 75px rgba(0,0,0,0.12);
+    box-shadow: var(--card-shadow, 0 30px 75px rgba(0,0,0,0.12));
     backdrop-filter: blur(18px);
+    transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .glass-card {
-    background: linear-gradient(135deg, rgba(8, 18, 31, 0.4), rgba(20, 35, 60, 0.3));
-    border: 1px solid rgba(110, 231, 183, 0.15);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    transition: background var(--transition), border-color var(--transition);
 }
 
 .form-panel {
-    background: linear-gradient(135deg, rgba(8, 18, 31, 0.5), rgba(20, 35, 60, 0.3));
+    background: var(--form-bg);
     border: 2px solid rgba(110, 231, 183, 0.2);
     backdrop-filter: blur(20px);
 }
 
 .feature-card {
-    transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    transition: background-color var(--transition), transform var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .feature-card:hover {
@@ -605,9 +679,9 @@ h1 {
 .form-grid input,
 .form-grid textarea,
 .form-grid select {
-    border: 2px solid rgba(110, 231, 183, 0.25);
+    border: 2px solid var(--input-border);
     border-radius: 14px;
-    background: linear-gradient(135deg, rgba(8, 18, 31, 0.8), rgba(20, 35, 60, 0.4));
+    background: var(--input-bg);
     color: var(--text);
     padding: 1rem 1.2rem;
     outline: none;
@@ -615,6 +689,81 @@ h1 {
     font-size: 0.95rem;
     transition: all var(--transition);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-with-icon input {
+    padding-right: 3rem; /* Make room explicitly for the icon */
+}
+
+.eye-toggle-checkbox {
+    display: none;
+}
+
+.eye-toggle-label {
+    position: absolute;
+    right: 1.2rem;
+    color: var(--muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 2;
+    transition: color 0.3s ease;
+}
+
+.eye-toggle-label:hover {
+    color: var(--accent);
+}
+
+.eye-toggle-label::after {
+    content: "\1F441"; /* Eye icon */
+}
+
+.eye-toggle-checkbox:checked ~ .eye-toggle-label::after {
+    content: "\1F648"; /* See-no-evil monkey icon or crossed eye equivalent */
+}
+
+.css-password-field {
+    -webkit-text-security: disc;
+}
+
+.input-with-icon:has(.eye-toggle-checkbox:checked) .css-password-field {
+    -webkit-text-security: none !important;
+}
+
+/* CSS Native Validation */
+.css-password-field:placeholder-shown ~ .password-help-box {
+    display: none;
+}
+
+.css-password-field:valid ~ .password-help-box {
+    display: none !important;
+}
+
+.css-password-field:not(:placeholder-shown):invalid ~ .password-help-box {
+    display: block;
+}
+
+.css-success-message, .css-error-message {
+    display: none;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.css-password-field:valid ~ .css-success-message {
+    display: block;
+    color: var(--success);
+}
+
+.css-password-field:not(:placeholder-shown):invalid ~ .css-error-message {
+    display: block;
+    color: var(--danger);
 }
 
 .form-grid input::placeholder,
@@ -626,7 +775,7 @@ h1 {
 .form-grid textarea:focus,
 .form-grid select:focus {
     border-color: var(--accent);
-    background: linear-gradient(135deg, rgba(8, 18, 31, 0.95), rgba(20, 35, 60, 0.6));
+    background: var(--input-focus-bg);
     box-shadow: 0 0 0 3px rgba(110, 231, 183, 0.15), 0 8px 24px rgba(110, 231, 183, 0.1);
     transform: translateY(-2px);
 }
@@ -647,8 +796,8 @@ h1 {
 
 .filter-form input,
 .filter-form select {
-    background: linear-gradient(135deg, rgba(8, 18, 31, 0.8), rgba(20, 35, 60, 0.4));
-    border: 2px solid rgba(110, 231, 183, 0.25);
+    background: var(--input-bg);
+    border: 2px solid var(--input-border);
     color: var(--text);
     border-radius: 14px;
     padding: 1rem 1.2rem;
@@ -664,6 +813,7 @@ h1 {
 .filter-form input:focus,
 .filter-form select:focus {
     border-color: var(--accent);
+    background: var(--input-focus-bg);
     box-shadow: 0 0 0 3px rgba(110, 231, 183, 0.15), 0 8px 24px rgba(110, 231, 183, 0.1);
     transform: translateY(-2px);
 }
@@ -1485,4 +1635,102 @@ select:focus {
 .action-bar .button {
     flex: 1;
     min-width: 150px;
+}
+
+/* Password Validation UI */
+.password-help-box {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: var(--surface-strong);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.password-help-box.visible {
+    display: block;
+}
+
+.password-help-box p {
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.password-requirements {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.password-requirements li {
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.password-requirements li::before {
+    content: "○";
+    font-size: 0.8rem;
+}
+
+.password-requirements li.valid {
+    color: var(--success);
+}
+
+.password-requirements li.valid::before {
+    content: "●";
+}
+
+.validation-message {
+    display: none;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.validation-message.visible {
+    display: block;
+}
+
+.validation-message.success {
+    color: var(--success);
+}
+
+.validation-message.error {
+    color: var(--danger);
+}
+
+/* Theme Icons Pure CSS Toggle */
+.theme-icon-sun {
+    display: none;
+}
+.theme-icon-moon {
+    display: block;
+}
+#theme-toggle:checked ~ .theme-toggle-label .theme-icon-sun {
+    display: block;
+}
+#theme-toggle:checked ~ .theme-toggle-label .theme-icon-moon {
+    display: none;
+}
+
+/* Pure CSS Session Tracking Hack */
+.theme-tracker-light, .theme-tracker-dark {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0.01;
+    pointer-events: none;
+}
+
+/* Pure CSS Toast Fade-out */
+.toast {
+    animation: fadeOut 0.5s ease-in-out 3s forwards;
+}
+@keyframes fadeOut {
+    0% { opacity: 1; display: block; }
+    100% { opacity: 0; display: none; visibility: hidden; }
 }

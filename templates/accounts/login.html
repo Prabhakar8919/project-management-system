@@ -14,7 +14,11 @@
             </div>
             <div class="form-grid">
                 <label>Password</label>
-                {{ form.password }}
+                <div class="input-with-icon">
+                    {{ form.password }}
+                    <input type="checkbox" id="login-show-pass" class="eye-toggle-checkbox">
+                    <label for="login-show-pass" class="eye-toggle-label"></label>
+                </div>
             </div>
             <button class="button" type="submit">Login</button>
         </form>

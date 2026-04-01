@@ -20,17 +20,20 @@
                 <label>Password</label>
                 <div class="input-with-icon">
                     {{ form.password }}
-                    <button type="button" class="eye-toggle" aria-label="Toggle password visibility">👁</button>
+                    <input type="checkbox" id="show-pass" class="eye-toggle-checkbox">
+                    <label for="show-pass" class="eye-toggle-label"></label>
                 </div>
-                <div id="password-strength" class="validation-message"></div>
+                <!-- Pure CSS Validation Elements -->
+                <div class="css-validation-message css-success-message">Strong password ✔</div>
+                <div class="css-validation-message css-error-message">Password too short ❌</div>
                 <div class="password-help-box">
                     <p>Password must contain:</p>
                     <ul class="password-requirements">
-                        <li data-rule="lowercase">Lowercase letter</li>
-                        <li data-rule="uppercase">Uppercase letter</li>
-                        <li data-rule="number">Number</li>
-                        <li data-rule="special">Special character</li>
-                        <li data-rule="length">At least 8 characters</li>
+                        <li>Lowercase letter</li>
+                        <li>Uppercase letter</li>
+                        <li>Number</li>
+                        <li>Special character</li>
+                        <li>At least 8 characters</li>
                     </ul>
                 </div>
             </div>
