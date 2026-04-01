@@ -19,77 +19,9 @@
                     <input type="checkbox" id="login-show-pass" class="eye-toggle-checkbox">
                     <label for="login-show-pass" class="eye-toggle-label"></label>
                 </div>
-                <!-- JS Validation Elements -->
-                <div class="password-help-box" id="pwd-help-container">
-                    <p style="margin-bottom: 8px; font-weight: 500;">Password must contain:</p>
-                    <ul class="password-requirements" style="list-style: none; padding-left: 0; margin: 0; font-size: 0.9em; line-height: 1.5;">
-                        <li id="req-lower" style="color: #f87171;">❌ At least 1 lowercase letter</li>
-                        <li id="req-upper" style="color: #f87171;">❌ At least 1 uppercase letter</li>
-                        <li id="req-num" style="color: #f87171;">❌ At least 1 number</li>
-                        <li id="req-spec" style="color: #f87171;">❌ At least 1 special character</li>
-                        <li id="req-len" style="color: #f87171;">❌ Minimum 8 characters</li>
-                    </ul>
-                </div>
-                <div id="pwd-success-msg" style="display: none; color: #4ade80; margin-top: 10px; font-weight: 500;">
-                    Strong password ✅
-                </div>
             </div>
             <button class="button" type="submit">Login</button>
         </form>
     </div>
 </section>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const pwdInput = document.querySelector('input[name="password"]');
-    const helpContainer = document.getElementById("pwd-help-container");
-    const successMsg = document.getElementById("pwd-success-msg");
-
-    if (!helpContainer || !successMsg || !pwdInput) return;
-
-    const reqs = {
-        lower: { el: document.getElementById("req-lower"), regex: /[a-z]/, text: "At least 1 lowercase letter" },
-        upper: { el: document.getElementById("req-upper"), regex: /[A-Z]/, text: "At least 1 uppercase letter" },
-        num: { el: document.getElementById("req-num"), regex: /[0-9]/, text: "At least 1 number" },
-        spec: { el: document.getElementById("req-spec"), regex: /[^A-Za-z0-9]/, text: "At least 1 special character" },
-        len: { el: document.getElementById("req-len"), regex: /.{8,}/, text: "Minimum 8 characters" }
-    };
-
-    function updateRequirements() {
-        const val = pwdInput.value;
-        let allValid = true;
-
-        if (val.length === 0) {
-            allValid = false;
-            Object.values(reqs).forEach(req => {
-                req.el.innerHTML = "❌ " + req.text;
-                req.el.style.color = "#f87171";
-            });
-        } else {
-            Object.values(reqs).forEach(req => {
-                const isValid = req.regex.test(val);
-                if (isValid) {
-                    req.el.innerHTML = "✅ " + req.text;
-                    req.el.style.color = "#4ade80";
-                } else {
-                    req.el.innerHTML = "❌ " + req.text;
-                    req.el.style.color = "#f87171";
-                    allValid = false;
-                }
-            });
-        }
-
-        if (allValid && val.length > 0) {
-            helpContainer.style.display = "none";
-            successMsg.style.display = "block";
-        } else {
-            helpContainer.style.display = "block";
-            successMsg.style.display = "none";
-        }
-    }
-
-    pwdInput.addEventListener("input", updateRequirements);
-    // Initialize state
-    updateRequirements();
-});
-</script>
 {% endblock %}
