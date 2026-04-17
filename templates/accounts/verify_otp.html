@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Verify OTP | Project Management{% endblock %}
+{% block content %}
+<section class="auth-section">
+    <div class="container auth-panel glass-card">
+        <h2>Security Verification</h2>
+        <p>Enter the 6-digit OTP sent to <strong>{{ email }}</strong>.</p>
+        <form method="post" autocomplete="off" novalidate>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-grid">
+                <label>Authentication Code</label>
+                {{ form.otp }}
+                {% if form.otp.errors %}
+                    <div class="error-msg">{{ form.otp.errors }}</div>
+                {% endif %}
+            </div>
+            <br>
+            <button class="button" type="submit">Verify Code</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

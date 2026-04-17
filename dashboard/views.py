@@ -10,7 +10,9 @@ from dashboard.forms import AdminLoginForm
 from projects.models import Project
 from django.contrib.auth.models import User
 
-
+# checking if user is already logged in as admin, if yes redirect to admin panel
+# validating login form and authenticating user credentials
+# if user is staff, log them in, otherwise show error message
 def admin_login_view(request):
     if request.user.is_authenticated and request.user.is_staff:
         return redirect('admin_panel')
@@ -70,7 +72,9 @@ def dashboard_view(request):
             'pending_pct': round((pending / total * 100) if total > 0 else 0),
             'rejected_pct': round((rejected / total * 100) if total > 0 else 0),
         }
-        
+    # if database fails, show error message to user
+# setting empty data for projects and default values for counts and stats
+# so the app does not crash and page still loads   
     except DatabaseError:
         messages.error(request, 'Unable to load dashboard data at this time.')
         projects = Project.objects.none()
@@ -96,7 +100,9 @@ def dashboard_view(request):
         },
     )
 
-
+# fetching all projects and recent users for admin dashboard
+# allowing admin to approve, reject or set project status
+# counting total users and projects and showing stats on dashboard
 @staff_required
 def admin_panel(request):
     projects = Project.objects.select_related('created_by', 'category').order_by('-created_at')

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Project Management{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}?v=10">
-    <!-- Deleted inline javascript FOUC flash handler -->
+    
     <style>
         #theme-toggle:checked ~ .theme-tracker-light {
             background-image: url("{% url 'set_theme_light' %}?t={% now 'U' %}");
@@ -14,7 +14,7 @@
         #theme-toggle:not(:checked) ~ .theme-tracker-dark {
             background-image: url("{% url 'set_theme_dark' %}?t={% now 'U' %}");
         }
-        /* Autofill fix */
+        
         input:-webkit-autofill,
         input:-webkit-autofill:hover, 
         input:-webkit-autofill:focus, 
@@ -37,7 +37,7 @@
                     <a href="/dashboard/" class="{% if request.path|slice:"0:10" == '/dashboard' %}active{% endif %}">Dashboard</a>
                 </nav>
                 <div class="nav-actions">
-                    <!-- Pure CSS Theme Toggle with Backend Persistence Hack -->
+                    
                     <input type="checkbox" id="theme-toggle" class="theme-checkbox" hidden aria-label="Toggle Theme" {% if request.session.theme == 'light' %}checked{% endif %}>
                     <label for="theme-toggle" class="theme-toggle-label" style="margin-right: 0.5rem; padding: 0.5rem; border-radius: 50%; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px solid var(--border); color: var(--text); cursor: pointer; transition: all var(--transition);">
                         <svg class="theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -74,6 +74,6 @@
             </div>
         </footer>
     </div>
-    <!-- Zero JS Scripts allowed -->
+    
 </body>
 </html>

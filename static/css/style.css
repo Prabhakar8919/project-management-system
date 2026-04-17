@@ -16,36 +16,36 @@
     --color-pink: #f472b6;
     --color-orange: #fb923c;
     --color-cyan: #22d3ee;
-    
+
     /* Card overrides for better visibility in dark mode */
     --card-bg: #1a1a1a;
     --card-border: #2a2a2a;
-    --card-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
     /* Hardcoded panel variables */
     --header-bg: linear-gradient(180deg, rgba(3, 10, 23, 0.96), rgba(7, 14, 34, 0.88));
-    --header-border: rgba(255,255,255,0.12);
+    --header-border: rgba(255, 255, 255, 0.12);
     --glass-bg: linear-gradient(135deg, rgba(8, 18, 31, 0.4), rgba(20, 35, 60, 0.3));
     --glass-border: rgba(110, 231, 183, 0.15);
     --form-bg: linear-gradient(135deg, rgba(8, 18, 31, 0.5), rgba(20, 35, 60, 0.3));
-    
+
     /* Inputs */
     --input-bg: linear-gradient(135deg, rgba(8, 18, 31, 0.8), rgba(20, 35, 60, 0.4));
     --input-border: rgba(110, 231, 183, 0.25);
     --input-focus-bg: linear-gradient(135deg, rgba(8, 18, 31, 0.95), rgba(20, 35, 60, 0.6));
-    
+
     /* Nav */
     --nav-hover: #ffffff;
-    
+
     /* Buttons */
     --btn-primary-bg: linear-gradient(135deg, #6ee7b7 0%, #22c55e 100%);
     --btn-primary-text: #08121f;
     --btn-primary-shadow: 0 8px 24px rgba(110, 231, 183, 0.3);
-    
+
     --btn-alt-bg: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(168, 85, 247, 0.15));
     --btn-alt-border: rgba(110, 231, 183, 0.4);
     --btn-alt-shadow: 0 8px 24px rgba(110, 231, 183, 0.15);
-    
+
     font-family: Inter, system-ui, sans-serif;
 }
 
@@ -58,32 +58,32 @@ html:has(#theme-toggle:checked) {
     --muted: #475569;
     --accent: #059669;
     --accent-dark: #047857;
-    
+
     /* Light theme cards */
     --card-bg: #ffffff;
     --card-border: #e2e8f0;
     --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    
+
     /* Hardcoded panel variables in light */
     --header-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.88));
-    --header-border: rgba(0,0,0,0.08);
+    --header-border: rgba(0, 0, 0, 0.08);
     --glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(241, 245, 249, 0.5));
     --glass-border: rgba(16, 185, 129, 0.2);
     --form-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(241, 245, 249, 0.7));
-    
+
     /* Inputs */
     --input-bg: rgba(255, 255, 255, 0.9);
     --input-border: rgba(16, 185, 129, 0.3);
     --input-focus-bg: #ffffff;
-    
+
     /* Nav */
     --nav-hover: #059669;
-    
+
     /* Buttons */
     --btn-primary-bg: linear-gradient(135deg, #059669 0%, #047857 100%);
     --btn-primary-text: #ffffff;
     --btn-primary-shadow: 0 8px 24px rgba(5, 150, 105, 0.2);
-    
+
     --btn-alt-bg: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(168, 85, 247, 0.1));
     --btn-alt-border: rgba(5, 150, 105, 0.3);
     --btn-alt-shadow: 0 8px 24px rgba(5, 150, 105, 0.1);
@@ -103,7 +103,7 @@ body {
     min-height: 100vh;
     background-color: var(--bg);
     background-image: radial-gradient(circle at top, rgba(110, 231, 183, 0.18), transparent 28%),
-                radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.16), transparent 28%);
+        radial-gradient(circle at bottom right, rgba(96, 165, 250, 0.16), transparent 28%);
     color: var(--text);
     transition: background-color var(--transition), color var(--transition);
 }
@@ -139,6 +139,7 @@ textarea {
     border-bottom: 1px solid var(--header-border);
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.16);
 }
+
 .header-inner {
     display: flex;
     align-items: center;
@@ -154,6 +155,7 @@ textarea {
     justify-content: center;
     flex-wrap: wrap;
 }
+
 .main-nav a {
     position: relative;
     color: var(--text);
@@ -374,7 +376,7 @@ h1 {
 }
 
 .status-tag {
-    background: rgba(110,231,183,0.16);
+    background: rgba(110, 231, 183, 0.16);
     color: var(--accent);
     padding: 0.5rem 0.85rem;
     border-radius: 999px;
@@ -420,7 +422,7 @@ h1 {
     border: 1px solid var(--card-border, var(--border));
     border-radius: 28px;
     padding: 1.7rem;
-    box-shadow: var(--card-shadow, 0 30px 75px rgba(0,0,0,0.12));
+    box-shadow: var(--card-shadow, 0 30px 75px rgba(0, 0, 0, 0.12));
     backdrop-filter: blur(18px);
     transition: background-color var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
@@ -445,7 +447,7 @@ h1 {
 
 .feature-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(110,231,183,0.35);
+    border-color: rgba(110, 231, 183, 0.35);
     box-shadow: 0 40px 90px rgba(110, 231, 183, 0.15);
 }
 
@@ -488,8 +490,8 @@ h1 {
 .project-card:hover {
     transform: translateY(-12px) scale(1.02);
     border-color: rgba(110, 231, 183, 0.4);
-    box-shadow: 0 20px 60px rgba(110, 231, 183, 0.2), 
-                0 0 30px rgba(110, 231, 183, 0.1);
+    box-shadow: 0 20px 60px rgba(110, 231, 183, 0.2),
+        0 0 30px rgba(110, 231, 183, 0.1);
 }
 
 .project-card:hover::before {
@@ -699,7 +701,8 @@ h1 {
 }
 
 .input-with-icon input {
-    padding-right: 3rem; /* Make room explicitly for the icon */
+    padding-right: 3rem;
+    /* Make room explicitly for the icon */
 }
 
 .eye-toggle-checkbox {
@@ -722,11 +725,13 @@ h1 {
 }
 
 .eye-toggle-label::after {
-    content: "\1F441"; /* Eye icon */
+    content: "\1F441";
+    /* Eye icon */
 }
 
-.eye-toggle-checkbox:checked ~ .eye-toggle-label::after {
-    content: "\1F648"; /* See-no-evil monkey icon or crossed eye equivalent */
+.eye-toggle-checkbox:checked~.eye-toggle-label::after {
+    content: "\1F648";
+    /* See-no-evil monkey icon or crossed eye equivalent */
 }
 
 .css-password-field {
@@ -738,30 +743,31 @@ h1 {
 }
 
 /* CSS Native Validation */
-.css-password-field:placeholder-shown ~ .password-help-box {
+.css-password-field:placeholder-shown~.password-help-box {
     display: none;
 }
 
-.css-password-field:valid ~ .password-help-box {
+.css-password-field:valid~.password-help-box {
     display: none !important;
 }
 
-.css-password-field:not(:placeholder-shown):invalid ~ .password-help-box {
+.css-password-field:not(:placeholder-shown):invalid~.password-help-box {
     display: block;
 }
 
-.css-success-message, .css-error-message {
+.css-success-message,
+.css-error-message {
     display: none;
     font-size: 0.85rem;
     margin-top: 0.5rem;
 }
 
-.css-password-field:valid ~ .css-success-message {
+.css-password-field:valid~.css-success-message {
     display: block;
     color: var(--success);
 }
 
-.css-password-field:not(:placeholder-shown):invalid ~ .css-error-message {
+.css-password-field:not(:placeholder-shown):invalid~.css-error-message {
     display: block;
     color: var(--danger);
 }
@@ -868,15 +874,15 @@ h1 {
     color: var(--muted);
     font-size: 0.95rem;
     padding: 0.65rem 0.9rem;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 18px;
 }
 
 .empty-state {
     text-align: center;
     padding: 3rem 1rem;
-    background: rgba(255,255,255,0.05);
-    border: 1px dashed rgba(255,255,255,0.18);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.18);
     border-radius: 24px;
 }
 
@@ -885,8 +891,8 @@ h1 {
     gap: 1rem;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    background: rgba(248,113,113,0.12);
-    border: 1px solid rgba(248,113,113,0.22);
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid rgba(248, 113, 113, 0.22);
     border-radius: 22px;
     color: #fee2e2;
 }
@@ -922,7 +928,7 @@ thead tr {
 td,
 th {
     padding: 1rem;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .admin-action-form {
@@ -955,7 +961,7 @@ th {
     min-width: 260px;
     background: rgba(15, 23, 42, 0.96);
     color: var(--text);
-    box-shadow: 0 24px 48px rgba(0,0,0,0.15);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
 }
 
 .toast-success {
@@ -972,6 +978,7 @@ th {
 }
 
 @media (max-width: 900px) {
+
     .header-inner,
     .filter-form,
     .stats-grid,
@@ -984,27 +991,27 @@ th {
     .main-nav {
         justify-content: center;
     }
-    
+
     .split-fields {
         grid-template-columns: 1fr;
     }
-    
+
     .form-actions {
         flex-direction: column;
     }
-    
+
     .card-actions {
         flex-direction: column;
     }
-    
+
     .card-actions .button {
         width: 100%;
     }
-    
+
     .action-bar {
         flex-direction: column;
     }
-    
+
     .action-bar .button {
         width: 100%;
     }
@@ -1026,31 +1033,31 @@ th {
     .button {
         width: 100%;
     }
-    
+
     .form-grid label {
         font-size: 0.85rem;
     }
-    
+
     .form-grid input,
     .form-grid textarea,
     .form-grid select {
         padding: 0.85rem 1rem;
         font-size: 0.9rem;
     }
-    
+
     .stat-card p {
         font-size: 2rem;
     }
-    
+
     .filter-form {
         grid-template-columns: 1fr;
     }
-    
+
     .pagination-bar {
         flex-direction: column;
         gap: 0.75rem;
     }
-    
+
     .pagination-bar .button {
         width: 100%;
     }
@@ -1092,6 +1099,7 @@ select option:hover {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1102,15 +1110,19 @@ select option:hover {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
 }
 
 @keyframes pulse-glow {
-    0%, 100% {
+
+    0%,
+    100% {
         box-shadow: 0 0 20px rgba(110, 231, 183, 0.3);
     }
+
     50% {
         box-shadow: 0 0 40px rgba(110, 231, 183, 0.5);
     }
@@ -1120,15 +1132,19 @@ select option:hover {
     0% {
         background-position: -1000px 0;
     }
+
     100% {
         background-position: 1000px 0;
     }
 }
 
 @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0px);
     }
+
     50% {
         transform: translateY(-10px);
     }
@@ -1158,9 +1174,9 @@ select option:hover {
 input:focus,
 textarea:focus,
 select:focus {
-    box-shadow: 0 0 0 3px rgba(110, 231, 183, 0.15), 
-                0 8px 24px rgba(110, 231, 183, 0.1),
-                inset 0 0 0 1px rgba(110, 231, 183, 0.1);
+    box-shadow: 0 0 0 3px rgba(110, 231, 183, 0.15),
+        0 8px 24px rgba(110, 231, 183, 0.1),
+        inset 0 0 0 1px rgba(110, 231, 183, 0.1);
 }
 
 /* Button ripple effect */
@@ -1169,6 +1185,7 @@ select:focus {
         transform: scale(0);
         opacity: 1;
     }
+
     100% {
         transform: scale(4);
         opacity: 0;
@@ -1511,24 +1528,24 @@ select:focus {
         grid-template-columns: 1fr;
         gap: 1.2rem;
     }
-    
+
     .button.primary-action,
     .button.secondary-action {
         padding: 1.5rem;
         font-size: 0.95rem;
         min-height: 110px;
     }
-    
+
     .action-icon {
         font-size: 2rem;
         min-width: 45px;
         min-height: 45px;
     }
-    
+
     .action-title {
         font-size: 0.95rem;
     }
-    
+
     .action-desc {
         font-size: 0.75rem;
     }
@@ -1707,18 +1724,22 @@ select:focus {
 .theme-icon-sun {
     display: none;
 }
+
 .theme-icon-moon {
     display: block;
 }
-#theme-toggle:checked ~ .theme-toggle-label .theme-icon-sun {
+
+#theme-toggle:checked~.theme-toggle-label .theme-icon-sun {
     display: block;
 }
-#theme-toggle:checked ~ .theme-toggle-label .theme-icon-moon {
+
+#theme-toggle:checked~.theme-toggle-label .theme-icon-moon {
     display: none;
 }
 
 /* Pure CSS Session Tracking Hack */
-.theme-tracker-light, .theme-tracker-dark {
+.theme-tracker-light,
+.theme-tracker-dark {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -1730,7 +1751,16 @@ select:focus {
 .toast {
     animation: fadeOut 0.5s ease-in-out 3s forwards;
 }
+
 @keyframes fadeOut {
-    0% { opacity: 1; display: block; }
-    100% { opacity: 0; display: none; visibility: hidden; }
+    0% {
+        opacity: 1;
+        display: block;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+        visibility: hidden;
+    }
 }

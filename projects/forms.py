@@ -1,10 +1,12 @@
 from django import forms
 from .models import Project, Category
 
+#form for project
 
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
+        # creating a form using Project model fields
         fields = ['title', 'student_name', 'roll_number', 'project_link', 'description', 'category']
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Project title'}),
@@ -15,7 +17,7 @@ class ProjectForm(forms.ModelForm):
             'category': forms.Select(attrs={'class': 'select-field'}),
         }
 
-
+#form for category
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category

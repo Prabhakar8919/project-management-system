@@ -8,25 +8,24 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
 
-
+#function for approval
 def approve_projects(modeladmin, request, queryset):
-    """Action to approve selected projects"""
     updated = queryset.update(status=Project.STATUS_APPROVED)
     modeladmin.message_user(request, f'{updated} project(s) approved successfully! ✅')
 
 approve_projects.short_description = "✅ Approve selected projects"
 
-
+#function for rejection
 def reject_projects(modeladmin, request, queryset):
-    """Action to reject selected projects"""
+
     updated = queryset.update(status=Project.STATUS_REJECTED)
     modeladmin.message_user(request, f'{updated} project(s) rejected successfully! ❌')
 
 reject_projects.short_description = "❌ Reject selected projects"
 
-
+#function for pending
 def mark_pending(modeladmin, request, queryset):
-    """Action to mark projects as pending"""
+    
     updated = queryset.update(status=Project.STATUS_PENDING)
     modeladmin.message_user(request, f'{updated} project(s) marked as pending! ⏳')
 
@@ -53,9 +52,9 @@ class ProjectAdmin(admin.ModelAdmin):
             'fields': ('status', 'display_status', 'created_by', 'created_at')
         }),
     )
-    
+    #function to display status badge
     def status_badge(self, obj):
-        """Display status with color coding"""
+        
         colors = {
             'approved': '#10b981',
             'pending': '#f59e0b',
@@ -74,9 +73,9 @@ class ProjectAdmin(admin.ModelAdmin):
             obj.get_status_display()
         )
     status_badge.short_description = 'Status'
-    
+    #function to display status
     def display_status(self, obj):
-        """Display current status in detail view"""
+        
         emoji = {
             'approved': '✅',
             'pending': '⏳',
@@ -85,7 +84,8 @@ class ProjectAdmin(admin.ModelAdmin):
         return f"{emoji.get(obj.status, '•')} {obj.get_status_display()}"
     display_status.short_description = 'Current Status'
     
+    #function to display description
     def display_description(self, obj):
-        """Display description in detail view"""
+        
         return obj.description
     display_description.short_description = 'Project Description'
